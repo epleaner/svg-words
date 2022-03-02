@@ -1,36 +1,18 @@
-let words = `walk time it and of very wish
-run person I that in quite ed
-play year you but to rather ing
-read way he or for the er
-learn day they as with more dog
-be thing we if on most cat
-have man she when at less mom
-do world who than from least dad
-say life them because by too the
-get hand me while about so grandma
-make part him where as just aunt
-go child one after into enough uncle
-know eye her so like indeed seem
-take woman us though through still feel
-see place something since after almost try
-come work nothing until over fairly leave
-think week anything whether between really call
-look case himself before out pretty ride
-want point everything although against even love
-give grandpa someone nor during a bit sort of
-use number themselves like without a little is
-find group everyone once before a lot was
-tell problem itself unless under were and
-ask fact anyone now around and school
-can could would will I food love`
-  .replaceAll(',', '')
-  .replaceAll('.', '')
-  .replaceAll(';', '')
-  .replaceAll('\n', ' ')
-  .split(' ');
+let doSave = true;
+let words =
+  `I me you he him she her it we us you they them am and but while though
+I me you he him she her it we us you they them am and but while though
+I me you he him she her it we us you they them am and but while though
+I me you he him she her it we us you they them am and but while though
+I me you he him she her it we us you they them am and but while though`
+    .replaceAll(',', '')
+    .replaceAll('.', '')
+    .replaceAll(';', '')
+    .replaceAll('\n', ' ')
+    .split(' ');
 
 let marginX = 100;
-let marginY = 60;
+let marginY = 55;
 let sizeText = 100;
 let circleSize = 10;
 let myFont;
@@ -39,7 +21,7 @@ function preload() {
 }
 
 function setup() {
-  createCanvas(1728, 864, SVG);
+  createCanvas(1728, 1296, SVG);
   colorMode(RGB, 255, 255, 255);
   strokeWeight(0.1);
   textFont(myFont);
@@ -56,12 +38,19 @@ function draw() {
 
   console.log(words.length, words.length * 3);
 
+  let file = 0;
+
   for (let i = 0; i < words.length; i++) {
     let word = words[i].toLowerCase();
     let wordWidth = textWidth(word) + marginX;
     if (currentX + wordWidth > width) {
       currentX = 0;
       currentY += sizeText + marginY;
+      if (currentY + sizeText + marginY > height) {
+        if (doSave) save(`${file++}.svg`);
+        background(255);
+        currentY = 0;
+      }
     }
     noFill();
     stroke(255, 0, 0);
@@ -124,9 +113,12 @@ function draw() {
     currentX += wordWidth;
   }
 
+  if (doSave) save(`${file++}.svg`);
+
   noLoop();
 }
 
 function mouseClicked() {
-  save('mySVG.svg');
+  save('1.svg');
+  save('2.svg');
 }

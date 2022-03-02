@@ -1,5 +1,5 @@
 function setup() {
-  createCanvas(1728, 864, SVG);
+  createCanvas(1700, 1200, SVG);
   colorMode(RGB, 255, 255, 255);
   strokeWeight(0.1);
 }
@@ -20,7 +20,8 @@ function draw() {
     let barWidth = Math.floor(Math.random() * 1000) + 500;
 
     if (currentX + barWidth > width) {
-      rect(currentX, currentY, width, barHeight);
+      console.log('too big');
+      rect(currentX, currentY, width - currentX, barHeight);
       circle(currentX + (width - currentX) / 6, currentY + barHeight / 2, 10);
       circle(currentX + (width - currentX) / 2, currentY + barHeight / 2, 10);
       circle(
@@ -33,16 +34,16 @@ function draw() {
       currentY += barHeight;
 
       circles += 3;
+    } else {
+      rect(currentX, currentY, barWidth, barHeight);
+      circle(currentX + barWidth / 6, currentY + barHeight / 2, 10);
+      circle(currentX + barWidth / 2, currentY + barHeight / 2, 10);
+      circle(currentX + (barWidth * 5) / 6, currentY + barHeight / 2, 10);
+
+      circles += 3;
+
+      currentX += barWidth;
     }
-
-    rect(currentX, currentY, barWidth, barHeight);
-    circle(currentX + barWidth / 6, currentY + barHeight / 2, 10);
-    circle(currentX + barWidth / 2, currentY + barHeight / 2, 10);
-    circle(currentX + (barWidth * 5) / 6, currentY + barHeight / 2, 10);
-
-    circles += 3;
-
-    currentX += barWidth;
   }
 
   console.log(circles);
