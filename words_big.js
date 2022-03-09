@@ -33,7 +33,8 @@ function setup() {
     widthInput.x + widthInput.width,
     0
   );
-  heightInput.position(widthInput.x + widthInput.width, widthInput.y);
+
+  heightInput.position(widthInput.x + widthInput.width + 5, widthInput.y);
 
   let wordLabel = createElement('span', 'words').position(
     0,
